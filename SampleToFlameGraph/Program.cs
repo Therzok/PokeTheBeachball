@@ -77,10 +77,17 @@ namespace SampleToFlameGraph
 						json = JsonConvert.SerializeObject(frame, Formatting.None);
 						toWrite = result.Replace("$jsonPlaceholder$", json);
 						toWrite = toWrite.Replace("window.screen.availHeight", (maxDepth * 18).ToString());
-						File.WriteAllText(Path.Combine(dirName, frame.Name + ".html"), toWrite);
+						File.WriteAllText(Path.Combine(dirName, GetName (frame) + ".html"), toWrite);
 					}
 				}
 			}
+		}
+
+		static string GetName (Frame frame)
+		{
+			return frame.Name
+						.Replace(":", "")
+						.Replace("/", "");
 		}
 	}
 }
